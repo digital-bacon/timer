@@ -1,9 +1,12 @@
-// An alarm clock / timer which will beep after a specified amount of time has passed.
-// The user can specify an unlimited number of alarms using command line arguments
-
-
-// Create an alarm that does something after some time has passed
- const alarm = (timeUntilAlarm, actionAlarm) => {
+/**
+ * Function that creates an alarm that does something after some time
+ * has passed
+ * @param {number} timeUntilAlarm - Time, in milliseconds, until an
+ * alarm does something
+ * @param {Function} actionAlarm - A callback function that will be
+ * invoked when the timer has expired
+ */
+const alarm = (timeUntilAlarm, actionAlarm) => {
   setTimeout(() => actionAlarm(), timeUntilAlarm);
 };
 
@@ -19,12 +22,22 @@ const beepInTerminal = () => process.stdout.write('\x07');
  * arguments that were provided in the command line
  * @returns {Array} The arguments
  */
- const argV = (argumentsOnly) => argumentsOnly ? process.argv.slice(2) : process.argv;
+const argV = (argumentsOnly) => argumentsOnly ? process.argv.slice(2) : process.argv;
 
-const queueAlarms = (actionAlarms, ...timers) => {
+/**
+ * Function that queues any number of alarms and will perform an action
+ * after each requested delay has transpired
+ * @param {Function} actionAlarms - Callback function invoked when each
+ * alarm timer is expired
+ * @param  {...any} requestedDelays - Any amount of number parameters
+ * denoting when each alarm will ring, in milliseconds
+ */
+const queueAlarms = (actionAlarms, ...requestedDelays) => {
+  let timers = Array(requestedDelays);
+  timers = timers.flat(Infinity);
   if (timers.length === 0) return;
   timers.forEach(timer => alarm(timer, actionAlarms));
 };
 
 // TEST CASE:
-queueAlarms(beepInTerminal, 1000, 2500, 4000, 5500);
+queueAlarms(beepInTerminal, argV(true));
