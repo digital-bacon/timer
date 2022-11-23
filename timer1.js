@@ -36,7 +36,11 @@ const queueAlarms = (actionAlarms, ...requestedDelays) => {
   let timers = Array(requestedDelays);
   timers = timers.flat(Infinity);
   if (timers.length === 0) return;
-  timers.forEach(timer => alarm(timer, actionAlarms));
+  timers.forEach(timer => {
+    if (Number(timer) > 0) {
+      alarm(timer, actionAlarms)
+    }
+  });
 };
 
 // TEST CASE:
