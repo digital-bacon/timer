@@ -38,7 +38,7 @@ const queueAlarms = (actionAlarms, ...requestedDelays) => {
   if (timers.length === 0) return;
   timers.forEach(timer => {
     if (Number(timer) > 0) {
-      alarm(timer, actionAlarms)
+      alarm(timer, actionAlarms);
     }
   });
 };
