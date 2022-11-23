@@ -18,3 +18,13 @@ const sentence = "hello there from lighthouse labs";
 // Print each letter in the sentence to the terminal with a 50ms delay
 // When done, print a new line
 alarm(1000, beepInTerminal);
+
+/**
+ * Function that returns Node command line arguments
+ * @param {boolean} argumentsOnly Set to `true` to only return the
+ * arguments that were provided in the command line
+ * @returns {Array} The arguments
+ */
+ const argV = (argumentsOnly) => argumentsOnly ? process.argv.slice(2) : process.argv;
+
+ console.log(argV(true));
