@@ -18,7 +18,11 @@ const alarm = (timeUntilAlarm, actionAlarm) => {
  */
 const beepInTerminal = () => process.stdout.write('\x07');
 
-const printCountDown = (count) => process.stdout.write(`setting timer for ${count} seconds...`);
+const printCountDown = (count) => process.stdout.write(`setting timer for ${count} seconds... `);
+
+const printAfterDelay = (message, delay) => {
+  setTimeout(() => process.stdout.write(message), delay);
+};
 
 /**
  * Function that returns Node command line arguments
@@ -51,6 +55,7 @@ const printCountDownThenBeep = (count) => {
   printCountDown(count);
   const milliseconds = count * 1000;
   queueAlarms(beepInTerminal, milliseconds);
+  printAfterDelay(`BEEP!\n`, milliseconds);
 }
 
 const inputHandler = {
@@ -113,6 +118,9 @@ rl.on('SIGINT', () => {
 });
 
 rl.on('line', (input) => {
-	inputHandler[input]();
-	rl.close();
+  try {
+	  inputHandler[input]();
+  } catch {
+    process.stdout.write('Beep the alarm with [b] or [1-9] to set delay. Exit with CTRL+C.\n');
+  }
 });
