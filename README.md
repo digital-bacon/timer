@@ -46,3 +46,17 @@ When `actionAlarms` is `beepInTerminal` and
 result will be a node beep sound played in the node
 terminal at 1000, 3000, 5000, 7000 milliseconds.
 ```
+
+
+## Using timer2.js
+
+Timer2.js is a command line application. It accepts user input, and plays an alarm sound.
+
+<code>node timer2.js</code>
+
+**Available inputs** 
+|  Input   | Outcome |
+| :-----:  | :------ |
+|    b     | Plays an alarm sound with no delay |
+|  0 - 9   | Prints an alarm delay (in seconds) and plays an alarm sound when delay has expired |
+|  CTRL+C  | Exit the application |
