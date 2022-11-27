@@ -18,6 +18,8 @@ const alarm = (timeUntilAlarm, actionAlarm) => {
  */
 const beepInTerminal = () => process.stdout.write('\x07');
 
+const printCountDown = (count) => process.stdout.write(`setting timer for ${count} seconds...`);
+
 /**
  * Function that returns Node command line arguments
  * @param {boolean} argumentsOnly Set to `true` to only return the
@@ -45,7 +47,49 @@ const queueAlarms = (actionAlarms, ...requestedDelays) => {
   });
 };
 
+const printCountDownThenBeep = (count) => {
+  printCountDown(count);
+  const milliseconds = count * 1000;
+  queueAlarms(beepInTerminal, milliseconds);
+}
+
 const inputHandler = {
+  1: function() {
+    printCountDownThenBeep(1)
+  },
+  
+  2: function() {
+    printCountDownThenBeep(2)
+  },
+  
+  3: function() {
+    printCountDownThenBeep(3)
+  },
+  
+  4: function() {
+    printCountDownThenBeep(4)
+  },
+  
+  5: function() {
+    printCountDownThenBeep(5)
+  },
+  
+  6: function() {
+    printCountDownThenBeep(6)
+  },
+  
+  7: function() {
+    printCountDownThenBeep(7)
+  },
+  
+  8: function() {
+    printCountDownThenBeep(8)
+  },
+  
+  9: function() {
+    printCountDownThenBeep(9)
+  },
+  
 
   b: function() {
     beepInTerminal();
