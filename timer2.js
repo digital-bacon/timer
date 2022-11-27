@@ -94,7 +94,7 @@ const inputHandler = {
   b: function() {
     beepInTerminal();
   },
-
+  
 }
 
 const rl = readline.createInterface({
@@ -102,10 +102,17 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+rl.on('SIGINT', () => {
+  setTimeout(() => {
+    process.stdout.write(`Thanks for using me, ciao!`)
+    setTimeout(() => {
+      process.stdout.write('\n');
+      rl.close();
+    }, 1000);
+  }, 0);
+});
+
 rl.on('line', (input) => {
 	inputHandler[input]();
 	rl.close();
 });
-
-// // TEST CASE:
-// queueAlarms(beepInTerminal, argV(true));
